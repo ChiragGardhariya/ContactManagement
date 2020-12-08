@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Contact Management</title>
+	@RenderSection("css", required: false)
+	<link href="~/theme/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="~/theme/dist/css/adminlte.css">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+
+	<div id="ajaxLoading"></div>
+	<!-- /.navbar -->
+	<!-- Main Sidebar Container -->
+	<aside class="main-sidebar sidebar-dark-primary elevation-4">
+		<!-- Brand Logo -->
+		<a href="#" class="brand-link">
+
+			<span class="brand-text font-weight-light" style="font-weight:bolder !important">Contact Info</span>
+		</a>
+
+		<!-- Sidebar -->
+		<div class="sidebar">
+			<!-- Sidebar user (optional) -->
+			<!-- Sidebar Menu -->
+			<nav class="mt-2">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+					
+					<li class="nav-item">
+						<a asp-action="List" asp-controller="Contact" class="nav-link">
+							<i class="nav-icon far fa-image"></i>
+							<p>
+								Contacts
+							</p>
+						</a>
+
+					</li>
+				</ul>
+			</nav>
+			<!-- /.sidebar-menu -->
+		</div>
+		<!-- /.sidebar -->
+	</aside>
+	<div class="wrapper">
+		@RenderBody()
+
+		<footer class="main-footer">
+		</footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+
+	</div>
+
+
+	<script src="~/theme/plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="~/theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="~/theme/dist/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	@*<script src="~/theme/dist/js/demo.js"></script>*@
+
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

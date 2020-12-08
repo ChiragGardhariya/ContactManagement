@@ -1,0 +1,113 @@
+﻿@model ContactVM
+@{
+	ViewData["Title"] = "Manage Contact";
+	bool isEdit = Model.Id > 0;
+	string title = isEdit ? "Edit contact details" : "Add new contact";
+}
+
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row" style="margin-top:20px">
+				<div class="col-md-2">
+
+				</div>
+				<div class="col-md-8">
+					<div class="card card-primary" style="margin-top:10%">
+						<div class="card-header">
+							<h3 class="card-title"> @title</h3>
+						</div>
+
+						<form asp-controller="Contact" asp-action="Manage" method="post" data-ajax="true"
+							  data-ajax-method="post"
+							  data-ajax-success="FormSubmitSuccess" data-ajax-begin="FormSubmitBegin" id="form_contact">
+							@*<form asp-controller="Contact" asp-action="Manage" method="post" id="form_contact" onsubmit="FormSubmit()">*@
+							<div class="card-body">
+								<input asp-for="Status" type="hidden" />
+
+								<div class="alert alert-success alert-dismissible" id="divSuccessMsg" style="display:none">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+									<h5><i class="icon fas fa-check"></i> Success!</h5>
+									Data saved successfully!
+								</div>
+
+
+								<div class="form-group">
+									<label asp-for="FirstName"></label>
+									<input asp-for="FirstName" class="form-control" />
+									<span asp-validation-for="FirstName" class="text-danger"></span>
+
+								</div>
+								<div class="form-group">
+									<label asp-for="LastName"></label>
+									<input asp-for="LastName" class="form-control" />
+									<span asp-validation-for="LastName" class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label asp-for="Email"></label>
+									<input asp-for="Email" class="form-control" />
+									<span asp-validation-for="Email" class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label asp-for="PhoneNumber"></label>
+									<input asp-for="PhoneNumber" class="form-control" />
+									<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+									<span class="text-danger" id="spanError"></span>
+								</div>
+
+							</div>
+							<!-- /.card-body -->
+
+							<div class="card-footer">
+								<button type="submit" class="btn btn-primary">Submit</button>
+
+								<a asp-action="List" class="btn btn-info" style="float:right;color:white">BackToList</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+@section scripts{
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+	@*<script src="~/Scripts/jquery.validate.min.js"></script>
+		<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
+			integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
+			crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
+			integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
+			crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		function FormSubmitBegin() {
+
+			$("#ajaxLoading").show();
+		}
+
+
+
+		function FormSubmitSuccess(data) {
+
+			$("#ajaxLoading").hide();
+			if (data.status == "fail") {
+				$("#spanError").text(data.message);
+			}
+			else {
+				//success
+				$("#spanError").text("");
+				@if(!isEdit)
+				{
+				   <text>$("#form_contact input").val('');</text>
+
+				}
+				$("#divSuccessMsg").show();
+			}
+
+		}
+	</script>
+}

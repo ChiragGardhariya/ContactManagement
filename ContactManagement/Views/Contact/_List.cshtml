@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Contact>
+
+<div class="card">
+	<div class="card-header">
+		<h3 class="card-title">Result</h3>
+	</div>
+	<div class="card-body">
+		<table id="tableContact" class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone#</th>
+					<th>Status</th>
+					<th></th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				@{ int i = 1;}
+				@foreach (var item in Model)
+				{
+					<tr id="tr_@item.Id">
+						<td>@i</td>
+						<td>@item.FirstName @item.LastName</td>
+
+						<td>@item.Email</td>
+						<td>@item.PhoneNumber</td>
+						<td class="@item.Status.ToBoolString()">@item.Status.ToBoolString()</td>
+						<td>
+							<a asp-action="Manage" asp-route-id="@item.Id" class="fa fa-edit"></a>
+
+							@{ string classname = item.Status ? "fa fa-trash" : "fa fa-check-square"; }
+
+							
+							<a href="#" class="@classname" title="Delete" onclick="ConfirmDelete(@item.Id)"></a>
+						</td>
+			
+					</tr>
+					i++;
+				}
+
+
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+<div class="modal fade" id="modal-delete">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirm Delete</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Are you soure you want to change status?</p>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+				<button type="button" class="btn btn-primary" onclick="DeleteContact()">Yes</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
