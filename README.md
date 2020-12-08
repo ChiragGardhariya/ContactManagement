@@ -25,4 +25,6 @@ ________________________________________________________________________________
 # Web UI (Front end) URL : http://chiragtest1290-001-site1.itempurl.com/
 # API URL:http://chirag1290-001-site1.itempurl.com/api/
 
+# One can add contact details, update the existing contact and active / inactive the contact
 
+# To keep the uniqueness of the cotact, here I have make the Mobile number field unique
